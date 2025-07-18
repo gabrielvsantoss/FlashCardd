@@ -1,0 +1,43 @@
+﻿@model PerguntasERespostasGepetecoViewModel
+
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Cadastrando tema de card";
+}
+
+<hr />
+<div class="row justify-content-center my-5">
+    <div class="col-md-8">
+        <div class="card rounded-4 border-0">
+            <div class="card-body p-md-5">
+                <form asp-action="Cadastrar">
+                    <h3>Cadastrando seu tema</h3>
+
+                    @if (ViewData.ModelState["CadastroUnico"]?.Errors.Count > 0)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show my-3" role="alert">
+                            @ViewData.ModelState["CadastroUnico"]!.Errors.First().ErrorMessage
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+
+                    <div class="form-group d-grid gap-2 mt-3">
+                        <label asp-for="TemaPergunta" class="control-label fs-5">Escreva o tema das perguntas que deseja gerar com IA</label>
+                        <input asp-for="TemaPergunta" class="form-control" />
+                        <span asp-validation-for="TemaPergunta" class="text-danger"></span>
+                    </div>
+                 
+     
+                    <div class="form-group d-flex align-items-center justify-content-end gap-3 mt-5">
+                        <a href="/garcons">Voltar para a listagem</a>
+                        <button type="submit" class="btn btn-primary rounded-3 px-5">Confirmar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

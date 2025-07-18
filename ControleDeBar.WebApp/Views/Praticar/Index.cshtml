@@ -1,0 +1,46 @@
+﻿@model VisualizarCardsViewModel
+
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Praticando";
+
+}
+
+@{
+    var secoesExibidas = new HashSet<string>();
+}
+
+<p>
+    <a class="btn btn-dark px-4" href="/cards/cadastrar">
+        <i class="bi bi-plus"></i>
+        Cadastrar Novo Card
+    </a>
+</p>
+
+<hr />
+
+<div class=" row justify-content-center my-5">
+    <div class="col-md-8">
+        <div class="card bg-light text-dark rounded-4 border-0">
+            <div class="card-body p-md-5">
+
+                <h3 class="fw-bold text-dark text-center mb-4">
+                    Escolha sua seção de estudos
+                </h3>
+                <div class="text-center">
+                @foreach (var item in Model.Registros)
+                {
+                    if (!string.IsNullOrWhiteSpace(item.Secao) && secoesExibidas.Add(item.Secao))
+                    {
+                            <a href="/praticar/praticar/secao/@Uri.EscapeDataString(item.Secao)/@Model.Contador" class="btn btn-dark m-1">
+                                @item.Secao
+                            </a> 
+                    }
+                }
+                </div>
+                
+               
+            </div>
+        </div>
+    </div>
+</div>

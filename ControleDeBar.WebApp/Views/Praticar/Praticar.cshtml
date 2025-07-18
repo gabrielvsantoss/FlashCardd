@@ -1,0 +1,58 @@
+﻿@using ControleDeBar.WebApp.Models
+
+@model VisualizarCardsViewModel
+
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Praticando";
+}
+
+<hr />
+<div class="row justify-content-center my-5">
+    <div class="col-md-8">
+        <div class="card rounded-4 border-0">
+            <div class="card-body p-md-5">
+
+                <div class="text-center"> 
+                    @foreach(var item in Model.Cards)
+                    {
+                        @if (item.Numero != Model.Contador)
+                        {
+                            Model.cardsAcabaram = true;
+                        }
+
+                        @if (item.Numero == Model.Contador)
+                        {
+                            <h3>@item.TextoFrente </h3>
+                            Model.cardsAcabaram = false;
+                            break;
+                        }
+                     
+                    }
+
+                    @if(Model.cardsAcabaram == true)
+                    {
+                        <div class="d-flex align-items-center justify-content-center form-group d-flex align-items-center justify-content-end gap-3">
+                            <h3 class ="text-center">Seus cards da sessão @Model.SecaoEscolhida acabaram!</h3>
+                        </div>
+
+                        <div class="form-group d-flex align-items-center justify-content-end gap-3">
+                            <a href="/praticar"type="submit" class="mt-2 btn btn-dark px-5">Voltar</a>
+                        </div>
+                    }
+
+                    @if(Model.cardsAcabaram == false)
+                    {
+                        <form asp-action="Resposta" method="post">
+                            <input type="hidden" asp-for="Contador" />
+                            <input type="hidden" asp-for="SecaoEscolhida" />
+                            <div class="form-group d-flex align-items-center justify-content-end gap-3">
+                                <button type="submit" class="btn btn-dark px-5">Ver reposta</button>
+                            </div>
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

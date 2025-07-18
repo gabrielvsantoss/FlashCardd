@@ -1,0 +1,38 @@
+﻿@model VisualizarCardsViewModel
+
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Visualização de Cards";
+}
+
+<p>
+    <a class="btn btn-dark px-4" href="/cards/cadastrar">
+        <i class="bi bi-plus"></i>
+        Cadastrar Novo/a
+    </a>
+</p>
+
+<hr />
+
+<div class="d-flex flex-wrap gap-2">
+    @foreach (var item in Model.Registros)
+    {
+        <div class="col-12 col-md-3">
+            <div class="card border-0"> 
+                <div class="card-body">
+                    <h5 class="card-title">Sessão do Card: @item.Secao</h5>
+                    <h6 class="card-title">Titulo: @item.Titulo</h6>
+
+                    <span class="d-flex gap-1 justify-content-end mt-4">
+                        <a href="/produtos/editar/@item.Id" class="btn btn-dark rounded-circle opcao-card">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                        <a href="/produtos/excluir/@item.Id" class="btn btn-dark rounded-circle opcao-card">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    }
+</div>

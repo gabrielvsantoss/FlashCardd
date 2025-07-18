@@ -1,0 +1,42 @@
+﻿@model ItensChatGptViewModel
+
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Finalizando seus cards";
+}
+
+<hr />
+<div class="row justify-content-center my-5">
+    <div class="col-md-8">
+        <div class="card rounded-4 border-0">
+            <div class="card-body p-md-5">
+
+
+                <form asp-Controller="Card" asp-action="EdicaoCards">
+                    <h3>Finalizando seus cards</h3>
+
+                    @if (ViewData.ModelState["CadastroUnico"]?.Errors.Count > 0)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show my-3" role="alert">
+                            @ViewData.ModelState["CadastroUnico"]!.Errors.First().ErrorMessage
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+
+                    @for (int i = 0; i < 10; i++)
+                    {
+                        <div class="mb-2">
+                            <input type="hidden" asp-for="@Model.Lista[i]" class="form-control" />
+                        </div>
+                    }
+
+                        <button type="submit" class="mt-3 btn btn-primary rounded-3 px-5">Criar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

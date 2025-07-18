@@ -1,0 +1,45 @@
+﻿@using ControleDeBar.WebApp.Models
+
+@model CardsComIAViewModel
+
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Praticando";
+}
+
+<hr />
+<div class="row justify-content-center my-5">
+    <div class="col-md-8">
+        <div class="card rounded-4 border-0">
+            <div class="card-body p-md-5">
+
+                <div class="text-center">
+                    <form asp-action="EdicaoCards" method="get">
+
+                        @for(int i = 0; i < Model.Perguntas.Length; i++)
+                        {
+                            <input type="hidden" name="Perguntas[@i]" value="@Model.Perguntas[i]" />
+                            <input type="hidden" name="Respostas[@i]" value="@Model.Respostas[i]" />
+
+                        }
+                        @for (int i = 0; i < Model.Perguntas.Length; i++)
+                        {
+                            if (Model.ContadorFrente == i)
+                            {
+                                Model.ContadorFrente++;
+                                <h3>@Model.Perguntas[i]</h3>
+                                break;
+                            }
+                        }
+
+                        <input type="hidden" name="ContadorFrente" value="@Model.ContadorFrente" />
+                        <input type="hidden" name="ContadorTras" value="@Model.ContadorTras" />
+
+                        <button class="btn btn-primary rounded-3 px-5">Ver resposta</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
